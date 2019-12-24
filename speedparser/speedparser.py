@@ -119,7 +119,7 @@ def strip_namespace(document):
         return None, document
     match = nsre.search(decoded)
     if match:
-        return match.groups()[0], nsre.sub('', document)
+        return match.groups()[0], nsre.sub('', decoded)
     return None, document
 
 
@@ -583,7 +583,7 @@ class SpeedParser(object):
         if self.xmlns and '#' in self.xmlns:
             self.xmlns = self.xmlns.strip('#')
         parser = etree.XMLParser(recover=True)
-        tree = etree.fromstring(six.ensure_binary(content), parser=parser)
+        tree = etree.fromstring(content, parser=parser)
         if isinstance(tree, etree._ElementTree):
             self.tree = tree
             self.root = tree.getroot()
