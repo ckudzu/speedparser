@@ -119,7 +119,7 @@ def strip_namespace(document):
         return None, document
     match = nsre.search(decoded)
     if match:
-        return match.groups()[0], nsre.sub('', decoded)
+        return match.groups()[0], six.ensure_binary(nsre.sub('', decoded))
     return None, document
 
 
