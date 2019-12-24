@@ -23,6 +23,7 @@ try:
 except:
 	import urllib.parse as urlparse
 import chardet
+import six
 from lxml import etree
 from lxml.html import clean
 
@@ -110,7 +111,7 @@ nsre = re.compile(r'xmlns\s*=\s*[\'"](.+?)[\'"]')
 
 def strip_namespace(document):
     # convert our bytes to a unicode string so we can search and slice.
-    decoded = document.decode('utf8')
+    decoded = six.ensure_str('utf8')
     if decoded[:1000].count('xmlns') > 5:
         if 'xmlns' not in decoded[:1000]:
             return None, document
@@ -582,7 +583,7 @@ class SpeedParser(object):
         if self.xmlns and '#' in self.xmlns:
             self.xmlns = self.xmlns.strip('#')
         parser = etree.XMLParser(recover=True)
-        tree = etree.fromstring(content, parser=parser)
+        tree = etree.fromstring(six.ensure_binary(content), parser=parser)
         if isinstance(tree, etree._ElementTree):
             self.tree = tree
             self.root = tree.getroot()
