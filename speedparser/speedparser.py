@@ -170,7 +170,7 @@ def full_href_attribs(attribs, base=None):
     if base is None:
         return dict(attribs)
     d = dict(attribs)
-    for key, value in d.iitems():
+    for key, value in d.items():
         if key == 'href':
             d[key] = full_href(value, base)
     return d
