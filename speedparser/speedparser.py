@@ -111,7 +111,7 @@ nsre = re.compile(r'xmlns\s*=\s*[\'"](.+?)[\'"]')
 
 def strip_namespace(document):
     # convert our bytes to a unicode string so we can search and slice.
-    decoded = six.ensure_str('utf8')
+    decoded = six.ensure_str(document)
     if decoded[:1000].count('xmlns') > 5:
         if 'xmlns' not in decoded[:1000]:
             return None, document
